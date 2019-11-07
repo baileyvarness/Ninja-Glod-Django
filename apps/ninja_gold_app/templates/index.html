@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <div id="top-area">
+        <div id="your-gold-text">
+            <p>Your Gold:</p>
+        </div>
+        <div id="your-gold-box">
+            <p>{{ request.session.counter }}</p>
+        </div>
+    </div>
+
+    <div id="locations-area">
+        
+        <div class="location-box">
+            <h3>Farm</h3>
+            <br>
+            <p>(earns 10-20 golds)</p>
+            <br>
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="location" value="farm">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+
+        <div class="location-box">
+            <h3>Cave</h3>
+            <br>
+            <p>(earns 5-10 golds)</p>
+            <br>
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="location" value="cave">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+
+        <div class="location-box">
+            <h3>House</h3>
+            <br>
+            <p>(earns 2-5 golds)</p>
+            <br>
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="location" value="house">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+
+        <div class="location-box">
+            <h3>Casino</h3>
+            <br>
+            <p>(earns/takes 0-50 golds)</p>
+            <br>
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="location" value="casino">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div id="activities-area">
+        <p style= "margin: 20px;">Activities:</p>
+        <div id="activities-box">
+            
+            {{ request.session.activities }}
+            
+            
+        </div>
+    </div>
+
+    <div style="margin: 20px;">
+        <form action="/reset" method="POST">
+            {% csrf_token %}
+            
+            <button>Reset Your Gold!</button>
+        </form>
+    </div>
+</body>
+</html>
